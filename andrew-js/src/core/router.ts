@@ -1,0 +1,37 @@
+import { Component } from "./component";
+
+interface IRoute {
+    path: string;
+    component: new () => Component;
+}
+
+export class Router {
+    public routes: IRoute[] | null = null;
+    public parentId: string;
+    private currentInstance: Component | null = null;
+
+    constructor(parentId: string, routes: IRoute[]){
+        this.parentId = parentId;
+        this.routes = routes;
+
+        window.addEventListener('hashchange', () => this.handleRoute());
+        window.addEventListener('load', () => this.handleRoute());
+    }
+
+    handleRoute(){
+        let hash = window.location.hash.replace(/^#/, '') || '/';
+
+        const routeConfig = this.routes?.find(r => r.path === hash);
+
+        if (routeConfig) {
+            if (this.currentInstance) {
+                this.currentInstance.unmount();
+            }
+
+            this.currentInstance = new routeConfig.component();
+            this.currentInstance.mount(this.parentId);
+        } else {
+            console.error(`Rota não encontrada: ${hash}`);
+        }
+    }
+}

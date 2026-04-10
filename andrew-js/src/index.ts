@@ -1,5 +1,6 @@
 import { createStore } from "andrew-tiger";
 import { Component } from "./core/component";
+import { Router } from "./core/router";
 
 class BotaoComponente extends Component {
     render(){
@@ -14,28 +15,28 @@ const store = createStore((set) => ({
 }));
 
 class Contador extends Component {
+    constructor() {
+        super();
+        this.bindStore(store); 
+    }
+
     render() {
-        const state = store.getState();
-        return `
-            <div class="text-center">
-                <p class="text-xl font-bold">Contagem: ${state.count}</p>
-                <button id="btn-add" class="bg-blue-500 text-white p-2 rounded">Adicionar</button>
-            </div>
-        `;
+        return `<div>${store.getState().count}</div> 
+                <button id="add"> + </button>`;
     }
 
     afterRender() {
-        const btn = this.ref?.querySelector("#btn-add");
-        if (btn) {
-            btn.onclick = () => store.getState().increment();
-        }
+        const btn = this.ref?.querySelector("#add");
+        if (btn) btn.onclick = () => store.getState().increment();
     }
 }
 
-const app = new Contador();
+const routes = [
+    { path: '/', component: BotaoComponente },
+    { path: '/contador', component: Contador }
+];
 
-app.bindStore(store);
-app.mount("#root");
+new Router('#root', routes);
 
 /**
  * criar classe que extende components
