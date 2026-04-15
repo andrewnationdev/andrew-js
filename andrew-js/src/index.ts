@@ -16,12 +16,15 @@ const store = createStore((set) => ({
 
 class Contador extends Component {
     constructor() {
-        super();
+        super({
+            title: "Hello World"
+        });
         this.bindStore(store); 
     }
 
     render() {
         return `<div>${store.getState().count}</div> 
+                <h1>${this.props.title}</h1>
                 <button id="add"> + </button>`;
     }
 

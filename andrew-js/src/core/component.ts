@@ -1,8 +1,14 @@
 type THTMLContent = string;
+type TProps = Record<string, any>;
 
 export abstract class Component {
     protected ref: HTMLElement | null = null;
     private deleteStore: () => void = () => {};
+    props: TProps = {};
+
+    constructor(props?: TProps){
+        this.props = props ?? {};
+    }
 
     abstract render(): THTMLContent;
 
