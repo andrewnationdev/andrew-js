@@ -34,9 +34,56 @@ class Contador extends Component {
     }
 }
 
+const store_notas = createStore((set) => ({
+    notes: [],
+    addNotes: (note: string) => set((state: {
+        notes: string[]
+    })=> ({
+        notes: [...state!.notes, note]
+    }))
+}));
+
+class BlocoNotas extends Component {
+    constructor(){
+        super({
+            title: "Exemplo Bloco de Notas"
+        });
+        this.bindStore(store_notas);
+    }
+
+    render(){
+        return `
+            <div class="flex flex-col gap-4 min-w-[70%]">
+                <h1>${this.props.title}</h1>
+                <hr/>
+                <div class="flex gap-4 justify-between">
+                    <input id="new-todo" class="border p-2 flex-grow" placeholder="Nova tarefa...">
+                    <button id="add-todo" class="px-6 py-2 bg-red-500 hover:bg-red-800 text-white font-semibold rounded-lg transition-colors shadow-md active:transform active:scale-95">
+                        Adicionar
+                    </button>
+                </div>
+                <hr/>
+                <ul id="list">
+                    ${store_notas.getState().notes.map((t, i) => `<li>${i} - ${t}</li>`).join('')}
+                </ul>
+            </div>
+        `
+    }
+
+    afterRender(){
+        const addButton = this?.ref?.querySelector("#add-todo");
+        if(addButton) addButton.onclick = () => {
+            const value = (this?.ref?.querySelector("#new-todo") as HTMLInputElement).value;
+            
+            if(value != "" && value != undefined) store_notas.getState().addNotes(value)
+        }
+    }
+}
+
 const routes = [
     { path: '/', component: BotaoComponente },
-    { path: '/contador', component: Contador }
+    { path: '/contador', component: Contador },
+    { path: '/notas', component: BlocoNotas }
 ];
 
 new Router('#root', routes);
