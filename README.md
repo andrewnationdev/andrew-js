@@ -116,3 +116,17 @@ class BlocoNotas extends Component {
     }
 }
 ```
+
+## HELPERS
+
+Os helpers são utilitários para auxiliar em algumas tarefas, reduzindo a quantidade de código necessária.
+
+`useSelector(ref, id)`.
+
+Exemplo:
+
+```ts
+//Seleciona o elemento com o id #add-todo
+const addButton: Element = useSelector(this?.ref!, "#add-todo");
+```
+

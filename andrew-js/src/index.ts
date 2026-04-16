@@ -1,6 +1,7 @@
 import { createStore } from "andrew-tiger";
 import { Component } from "./core/component";
 import { Router } from "./core/router";
+import { useSelector } from "./dom/helper";
 
 class BotaoComponente extends Component {
     render(){
@@ -71,9 +72,10 @@ class BlocoNotas extends Component {
     }
 
     afterRender(){
-        const addButton = this?.ref?.querySelector("#add-todo");
+        const addButton: Element = useSelector(this?.ref!, "#add-todo");
+        
         if(addButton) addButton.onclick = () => {
-            const value = (this?.ref?.querySelector("#new-todo") as HTMLInputElement).value;
+            const value = (useSelector(this?.ref!, "#new-todo") as HTMLInputElement).value;
             
             if(value != "" && value != undefined) store_notas.getState().addNotes(value)
         }
