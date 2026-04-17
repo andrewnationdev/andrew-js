@@ -1,5 +1,4 @@
-type THTMLContent = string;
-type TProps = Record<string, any>;
+import { THTMLContent, TProps } from "../types/types";
 
 export abstract class Component {
     protected ref: HTMLElement | null = null;

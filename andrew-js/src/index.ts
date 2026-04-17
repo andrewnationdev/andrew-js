@@ -1,7 +1,8 @@
 import { createStore } from "andrew-tiger";
 import { Component } from "./core/component";
-import { Router } from "./core/router";
+import { Router } from "./router/router";
 import { useSelector } from "./dom/helper";
+import { IRoute } from "./types/types";
 
 class BotaoComponente extends Component {
     render(){
@@ -65,7 +66,7 @@ class BlocoNotas extends Component {
                 </div>
                 <hr/>
                 <ul id="list">
-                    ${store_notas.getState().notes.map((t, i) => `<li>${i} - ${t}</li>`).join('')}
+                    ${store_notas!.getState()!.notes!.map((t, i) => `<li>${i} - ${t}</li>`).join('')}
                 </ul>
             </div>
         `
@@ -82,7 +83,7 @@ class BlocoNotas extends Component {
     }
 }
 
-const routes = [
+const routes: IRoute[] = [
     { path: '/', component: BotaoComponente },
     { path: '/contador', component: Contador },
     { path: '/notas', component: BlocoNotas }

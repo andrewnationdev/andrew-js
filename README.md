@@ -4,6 +4,14 @@ Este é um projeto experimental que propõe criar um MVP de um framework JavaScr
 
 This is an experimental project that proposes the creation of an MVP for a JavaScript framework for studying purposes.
 
+## INSTALAÇÃO E CONFIGURAÇÃO
+
+1-Baixe o repositório ou clone-o.
+2-Escreva o código em `/src/index.ts`.
+3-Importe em seu `index.html` o seguinte `<script type="module" src="../src/index.ts"></script>`.
+4-Crie uma `<div>` com o id `#root` para montar a aplicação.
+5-Use o comando `cd andrew-js && npx vite` para iniciar o projeto.
+
 ## TECNOLOGIAS EMPREGADAS
 
 - Vite
@@ -129,4 +137,3 @@ Exemplo:
 //Seleciona o elemento com o id #add-todo
 const addButton: Element = useSelector(this?.ref!, "#add-todo");
 ```
-

@@ -1,9 +1,5 @@
-import { Component } from "./component";
-
-interface IRoute {
-    path: string;
-    component: new () => Component;
-}
+import { Component } from "../core/component";
+import { IRoute } from "../types/types";
 
 export class Router {
     public routes: IRoute[] | null = null;
@@ -29,7 +25,7 @@ export class Router {
             }
 
             this.currentInstance = new routeConfig.component();
-            this.currentInstance.mount(this.parentId);
+            this.currentInstance!.mount(this.parentId);
         } else {
             console.error(`Rota não encontrada: ${hash}`);
         }
