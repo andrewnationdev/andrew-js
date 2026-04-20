@@ -137,3 +137,24 @@ Exemplo:
 //Seleciona o elemento com o id #add-todo
 const addButton: Element = useSelector(this?.ref!, "#add-todo");
 ```
+
+## PARÂMETROS DE ROTA
+
+Em breve!
+
+## ANINHAMENTO DE COMPONENTES
+
+Em breve!
+
+```ts
+afterRender() {
+    this.children = [
+        { instance: new NomeComponente(), selector: "#seletor" },
+        { instance: new NomeComponente(), selector: "#seletor" }
+    ];
+
+    this.children.forEach(child => {
+        child.instance.mount(child.selector);
+    });
+}
+```

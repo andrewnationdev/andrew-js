@@ -24,10 +24,29 @@ export class Router {
                 this.currentInstance.unmount();
             }
 
+            /*
+            const params = handleURLParams();
+            injetar params no componente, como props.
+            */
+            const params = new URLSearchParams(window.location.search);
+            console.log(params)
+
             this.currentInstance = new routeConfig.component();
             this.currentInstance!.mount(this.parentId);
         } else {
             console.error(`Rota não encontrada: ${hash}`);
         }
     }
+}
+
+
+interface IRouterParams {
+    property: string;
+    value: string;
+}
+
+function handleURLParams(){
+    const params = new URLSearchParams(window.location.search);
+
+    return params;
 }
