@@ -140,21 +140,34 @@ const addButton: Element = useSelector(this?.ref!, "#add-todo");
 
 ## PARÂMETROS DE ROTA
 
-Em breve!
+Na rota, os parâmetros são passados assim: `#/home?id=9`. Tudo o que estiver depois do `?` são os parâmetros. Para acessá-los dentro do componente, use `this.props.[chave]`. Por exemplo, para acessar o `id` no exemplo anterior use `this.props.id`.
 
 ## ANINHAMENTO DE COMPONENTES
 
-Em breve!
+Para colocar um componente dentro outro, deve-se instanciar esse componente e depois chamar a função `render()` no local em que ele será renderizado.
 
 ```ts
-afterRender() {
-    this.children = [
-        { instance: new NomeComponente(), selector: "#seletor" },
-        { instance: new NomeComponente(), selector: "#seletor" }
-    ];
+class HomePage extends Component {
+    header = new Header();
+    footer = new Footer();
+    listaNotas = new ListaTarefasComponente();
 
-    this.children.forEach(child => {
-        child.instance.mount(child.selector);
-    });
+    render(){
+        return `
+            <div class="w-full min-h-screen">
+                <div id="header">${this.header.render()}</div>
+                <div class="my-12">
+                 <div id="content">${this.listaNotas.render()}</div>
+                </div>
+                <div id="footer">${this.footer.render()}</div>
+            </div>
+        `;
+    }
+
+    afterRender(){
+        this.attachChild(this.header, "#header");
+        this.attachChild(this.listaNotas, "#content");
+        this.attachChild(this.footer, "#footer");
+    }
 }
 ```

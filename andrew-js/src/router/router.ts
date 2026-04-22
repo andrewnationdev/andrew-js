@@ -15,26 +15,23 @@ export class Router {
     }
 
     handleRoute(){
-        let hash = window.location.hash.replace(/^#/, '') || '/';
+        const fullHash = window.location.hash.replace(/^#/, '') || '/';
+        const [path, queryString] = fullHash.split('?');
 
-        const routeConfig = this.routes?.find(r => r.path === hash);
+        const routeConfig = this.routes?.find(r => r.path === path);
 
         if (routeConfig) {
             if (this.currentInstance) {
                 this.currentInstance.unmount();
             }
 
-            /*
-            const params = handleURLParams();
-            injetar params no componente, como props.
-            */
-            const params = new URLSearchParams(window.location.search);
-            console.log(params)
+            const params = new URLSearchParams(queryString || "");
+            const props = Object.fromEntries(params.entries());
 
-            this.currentInstance = new routeConfig.component();
+            this.currentInstance = new routeConfig.component(props);
             this.currentInstance!.mount(this.parentId);
         } else {
-            console.error(`Rota não encontrada: ${hash}`);
+            console.error(`Rota não encontrada: ${path}`);
         }
     }
 }

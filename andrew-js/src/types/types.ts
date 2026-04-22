@@ -1,3 +1,5 @@
+import { Component } from "../core/component";
+
 export interface IRoute {
     path: string;
     component: new () => Component;
@@ -5,3 +7,9 @@ export interface IRoute {
 
 export type THTMLContent = string;
 export type TProps = Record<string, any>;
+export type TSelector = string;
+
+export interface IChildren {
+    instance: new () => Component;
+    selector: TSelector;
+};
