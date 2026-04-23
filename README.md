@@ -72,6 +72,8 @@ const store = createStore((set) => ({
 }));
 ```
 
+Para acessar a propriedade `count` lá nesse store, use `store.getState().count`.
+
 ## EXEMPLO BLOCO DE NOTAS
 
 ```ts
@@ -129,7 +131,9 @@ class BlocoNotas extends Component {
 
 Os helpers são utilitários para auxiliar em algumas tarefas, reduzindo a quantidade de código necessária.
 
-`useSelector(ref, id)`.
+## useSelector(ref, id)
+
+Usado para selecionar um elemento no DOM.
 
 Exemplo:
 

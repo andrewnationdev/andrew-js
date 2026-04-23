@@ -8,8 +8,3 @@ export interface IRoute {
 export type THTMLContent = string;
 export type TProps = Record<string, any>;
 export type TSelector = string;
-
-export interface IChildren {
-    instance: new () => Component;
-    selector: TSelector;
-};

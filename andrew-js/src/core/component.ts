@@ -1,4 +1,4 @@
-import { IChildren, THTMLContent, TProps } from "../types/types";
+import { THTMLContent, TProps } from "../types/types";
 
 export abstract class Component {
     protected ref: HTMLElement | null = null;
